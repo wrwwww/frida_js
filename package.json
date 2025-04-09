@@ -1,0 +1,20 @@
+{
+  "name": "frida-agent-example",
+  "version": "1.0.0",
+  "description": "Example Frida agent written in TypeScript",
+  "private": true,
+  "main": "agent/index.ts",
+  "apk_package":"",
+  "scripts": {
+    "watch": "frida-compile agent/index.ts -o ./scripts/_agent.js -w",
+    "pullapk":"adb pull $(adb shell pm path  com.fingersoft.hillclimb.noncmcc| cut -d':' -f2) ./apks/original.apk",
+    "compile":"frida-compile agent/index.ts -o scripts/_agent.js -c",
+    "patch":"node ./scripts/patch-apks.js",
+    "build": "npm run compile &&npm run patch"
+  },
+  "devDependencies": {
+    "@types/frida-gum": "^18.5.1",
+    "@types/node": "^18.19.3",
+    "frida-compile": "^16.4.1"
+  }
+}
